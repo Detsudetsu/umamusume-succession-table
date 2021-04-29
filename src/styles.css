@@ -37,3 +37,7 @@ table tr td img {
   width: 50px;
   height: auto;
 }
+
+table tr td img.unselected {
+  filter: opacity(0.5);
+}
