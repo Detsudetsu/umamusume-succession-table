@@ -1,4 +1,5 @@
 import "./styles.css";
+import "./csv2table";
 
 let highlightedImgName = "none";
 const imgs = document.getElementsByTagName("img");
