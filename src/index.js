@@ -1,32 +1,29 @@
 import "./styles.css";
+import makeTable from "./csv2table";
 
-let highlightedImgName = "none";
-const imgs = document.getElementsByTagName("img");
-for (const img of imgs) {
-  img.addEventListener("click", () => {
-    const clickedImgName = img.getAttribute("src");
-    if (clickedImgName === highlightedImgName) {
-      resetHighlight();
-    } else {
-      highlight(clickedImgName);
-    }
-  });
-}
-
-function resetHighlight() {
+async function haru() {
+  await makeTable;
+  let lastSelectedImgName = "none";
+  const imgs = document.getElementsByTagName("img");
   for (const img of imgs) {
-    img.classList.remove("unselected");
+    img.addEventListener("click", (event) => {
+      const clickedImgName = event.target.getAttribute("src");
+      if (clickedImgName === lastSelectedImgName) {
+        for (const img of imgs) {
+          img.classList.remove("unselected");
+        }
+        lastSelectedImgName = "none";
+      } else {
+        for (const img of imgs) {
+          if (img.getAttribute("src") === clickedImgName) {
+            img.classList.remove("unselected");
+          } else {
+            img.classList.add("unselected");
+          }
+        }
+        lastSelectedImgName = clickedImgName;
+      }
+    });
   }
-  highlightedImgName = "none";
 }
-
-function highlight(keySrcName) {
-  for (const img of imgs) {
-    if (img.getAttribute("src") === keySrcName) {
-      img.classList.remove("unselected");
-    } else {
-      img.classList.add("unselected");
-    }
-  }
-  highlightedImgName = keySrcName;
-}
+haru();
